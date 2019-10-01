@@ -1,5 +1,5 @@
 # mac
-[](http://liwei.utools.club/mac/)
+[url](http://liwei.utools.club/mac/)
 ## Project setup
 ```
 npm install
