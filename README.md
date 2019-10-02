@@ -1,5 +1,5 @@
 # mac
-[url](http://liwei.utools.club/mac/)
+[Website link](http://liwei.utools.club/mac/)
 ## Project setup
 ```
 npm install
@@ -24,6 +24,11 @@ npm run test
 ```
 npm run lint
 ```
-
+### screenshot
+![](./screenshot/jietu.png)
+![](./screenshot/jietu2.png)
+![](./screenshot/jietu3.png)
+![](./screenshot/jietu4.png)
+![](./screenshot/jietu5.png)
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
