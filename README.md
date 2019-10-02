@@ -30,5 +30,6 @@ npm run lint
 ![](./screenshot/jietu3.png)
 ![](./screenshot/jietu4.png)
 ![](./screenshot/jietu5.png)
+![](./screenshot/jietu6.png)
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

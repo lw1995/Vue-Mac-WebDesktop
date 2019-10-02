@@ -11,21 +11,21 @@
       <ul class="header-right">
         <li class="iconfont">&#xe6c0;</li>
         <li class="iconfont">&#xe688;</li>
-        <li class="iconfont">&#xe6ca;</li>
+        <li class="iconfont" @click="openMusic">&#xe6ca;</li>
         <li class="iconfont">&#xe6a7;</li>
         <li class="iconfont">&#xe6cb;</li>
         <li class="iconfont">&#xe6b8;</li>
-        <li class="iconfont">{{time}}</li>
+        <li class="iconfont" @click="weather">{{time}}</li>
       </ul>
     </div>
-    <div class="content" :style="{backgroundImage: 'url(' + bgSrc + ')' }">
+    <div class="content" :style="{backgroundImage: 'url(' + bgSrc + ')' }" @click="weatherHide">
       <ul class="app-list">
         <li class="list-item" @click="computer"><img src="../assets/images/computer.png" alt=""><span>我的电脑</span></li>
         <li class="list-item"><img src="../assets/images/TrashIcon.png" alt=""><span>回收站</span></li>
         <li class="list-item" @click="tools"><img src="../assets/images/tool.png" alt=""><span>工具箱</span></li>
       </ul>
     </div>
-    <div id="container">
+    <div id="container" @click="weatherHide">
       <div id="dock">
         <ul>
           <li>
@@ -64,6 +64,12 @@
       </div>
     </div>
 
+
+    <transition name="slide-fade">
+      <div class="weather" v-show="weatherShow">
+        <iframe src="https://widget-page.heweather.net/h5/index.html?bg=3&md=036&lc=accu&key=09ce9044126b48f5b79c6d8f198e832a"></iframe>
+      </div>
+    </transition>
     <Music :musicShow.sync='musicShow' :musicNarrow.sync='musicNarrow'></Music>
     <Browser :browserShow.sync='browserShow' :browserNarrow.sync='browserNarrow'></Browser>
     <Wallpaper :wallShow.sync='wallShow' :bgSrc.sync='bgSrc'></Wallpaper>
@@ -103,6 +109,7 @@
         toolShow: false,
         computerShow: false,
         aboutShow: false,
+        weatherShow: false,
         bgSrc: ''
       }
     },
@@ -122,26 +129,44 @@
         this.musicShow = true
         this.musicNarrow = true
       },
+
       /* 打开浏览器 */
       openBrowser() {
         this.browserShow = true
         this.browserNarrow = true
       },
+
       /* 打开壁纸 */
       wallpaper() {
         this.wallShow = true
       },
+
       /* 打开工具箱 */
       tools() {
         this.toolShow = true
       },
+
       /* 打开我的电脑 */
       computer() {
         this.computerShow = true
       },
+
       about() {
         this.aboutShow = true
       },
+
+      weather() {
+        if (this.weatherShow) {
+          this.weatherShow = false
+        } else {
+          this.weatherShow = true
+        }
+      },
+
+      weatherHide() {
+        this.weatherShow = false
+      },
+
       newDate() {
         let now = new Date()
         let year = now.getFullYear() // 得到年份
@@ -173,7 +198,8 @@
           this.bgSrc = '/mac/img/bg.0e445a5d.jpg'
         }
       }
-    }
+    },
+    mounted() {}
   }
 </script>
 
@@ -320,5 +346,16 @@
   #container li:hover span {
     display: block;
     color: #fff;
+  }
+
+  .weather {
+    position: fixed;
+    top: 30px;
+    right: 0;
+  }
+
+  .weather iframe {
+    height: calc(100vh - 30px);
+    border: none;
   }
 </style>

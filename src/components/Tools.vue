@@ -131,21 +131,29 @@
     margin-top: 10px;
     text-align: center;
     box-sizing: border-box;
-    background-image: linear-gradient(160deg, #00ffd5 20%,#008cff 80%);
-    border-radius: 20px;
   }
 
   .list-box li .bt {
     display: inline-block;
-    width: 100px;
-    line-height: 60px;
+    width: 80px;
+    line-height: 80px;
+    line-height: 80px;
     font-size: 48px;
     text-align: center;
     font-weight: 700;
     color: #fff;
+    background-image: linear-gradient(160deg, #166FEF 20%, #14B1F8 80%);
+    border-radius: 50%;
+    border: 5px solid #E9E9E9;
+  }
+
+  .list-box li .bt:hover {
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
   }
 
   .list-box li .title {
-    color: #fff;
+    line-height: 40px;
+    color: #333;
   }
 </style>
