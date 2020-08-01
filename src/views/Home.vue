@@ -18,7 +18,7 @@
         <li class="iconfont" @click="weather">{{time}}</li>
       </ul>
     </div>
-    <div class="content" :style="{backgroundImage: 'url(' + bgSrc + ')' }" @click="weatherHide">
+    <div class="content-hone" :style="{backgroundImage: 'url(' + bgSrc + ')' }" @click="weatherHide">
       <ul class="app-list">
         <li class="list-item" @click="computer"><img src="../assets/images/computer.png" alt=""><span>我的电脑</span></li>
         <li class="list-item"><img src="../assets/images/TrashIcon.png" alt=""><span>回收站</span></li>
@@ -64,18 +64,11 @@
       </div>
     </div>
 
-
     <transition name="slide-fade">
       <div class="weather" v-show="weatherShow">
         <iframe src="https://widget-page.heweather.net/h5/index.html?bg=3&md=036&lc=accu&key=09ce9044126b48f5b79c6d8f198e832a"></iframe>
       </div>
     </transition>
-    <Music :musicShow.sync='musicShow' :musicNarrow.sync='musicNarrow'></Music>
-    <Browser :browserShow.sync='browserShow' :browserNarrow.sync='browserNarrow'></Browser>
-    <Wallpaper :wallShow.sync='wallShow' :bgSrc.sync='bgSrc'></Wallpaper>
-    <Tools :toolShow.sync='toolShow'></Tools>
-    <Computer :computerShow.sync='computerShow'></Computer>
-    <About :aboutShow.sync='aboutShow'></About>
   </div>
 </template>
 
@@ -87,6 +80,7 @@
   import Tools from '@/components/Tools.vue'
   import Computer from '@/components/Computer.vue'
   import About from '@/components/About.vue'
+
   export default {
     name: 'home',
     components: {
@@ -110,7 +104,7 @@
         computerShow: false,
         aboutShow: false,
         weatherShow: false,
-        bgSrc: ''
+        bgSrc: '',
       }
     },
 
@@ -119,40 +113,60 @@
       this.setInter = setInterval(() => {
         this.newDate()
       }, 1000)
-
       this.setBg()
     },
 
     methods: {
       /* 打开音乐 */
       openMusic() {
-        this.musicShow = true
-        this.musicNarrow = true
+        this.$layer.iframe({
+          title: '音乐',
+          maxmin: true,
+          area: ['70%', '60%'],
+          content: {
+            content: Music, //传递的组件对象
+            parent: this, //当前的vue对象
+            data: {} //props
+          }
+        });
       },
-
       /* 打开浏览器 */
       openBrowser() {
-        this.browserShow = true
-        this.browserNarrow = true
+        this.$layer.iframe({
+          title: '浏览器',
+          maxmin: true,
+          area: ['70%', '60%'],
+          content: {
+            content: Browser, //传递的组件对象
+            parent: this, //当前的vue对象
+            data: {} //props
+          }
+        });
       },
-
       /* 打开壁纸 */
       wallpaper() {
-        this.wallShow = true
+        this.$layer.iframe({
+          title: '壁纸中心',
+          maxmin: true,
+          area: ['70%', '60%'],
+          content: {
+            content: Wallpaper, //传递的组件对象
+            parent: this, //当前的vue对象
+            data: {} //props
+          }
+        });
       },
-
-      /* 打开工具箱 */
-      tools() {
-        this.toolShow = true
-      },
-
-      /* 打开我的电脑 */
-      computer() {
-        this.computerShow = true
-      },
-
       about() {
-        this.aboutShow = true
+        this.$layer.iframe({
+          title: '关于',
+          maxmin: true,
+          area: ['70%', '60%'],
+          content: {
+            content: About, //传递的组件对象
+            parent: this, //当前的vue对象
+            data: {} //props
+          }
+        });
       },
 
       weather() {
@@ -166,7 +180,30 @@
       weatherHide() {
         this.weatherShow = false
       },
-
+      computer() {
+        this.$layer.iframe({
+          title: '我的电脑',
+          maxmin: true,
+          area: ['70%', '60%'],
+          content: {
+            content: Computer, //传递的组件对象
+            parent: this, //当前的vue对象
+            data: {} //props
+          }
+        });
+      },
+      tools() {
+        this.$layer.iframe({
+          title: '工具箱',
+          maxmin: true,
+          area: ['70%', '60%'],
+          content: {
+            content: Tools, //传递的组件对象
+            parent: this, //当前的vue对象
+            data: {} //props
+          }
+        });
+      },
       newDate() {
         let now = new Date()
         let year = now.getFullYear() // 得到年份
@@ -177,7 +214,7 @@
         let minu = now.getMinutes() // 得到分钟
         let sec = now.getSeconds() // 得到秒
         let MS = now.getMilliseconds() // 获取毫秒
-        let week
+
         month = month + 1
         if (month < 10) month = '0' + month
         if (date < 10) date = '0' + date
@@ -186,8 +223,8 @@
         if (sec < 10) sec = '0' + sec
         if (MS < 100) MS = '0' + MS
         const arrweek = new Array('星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六')
-        week = arrweek[day]
-        /* this.time = year + '年' + month + '月' + date + '日' + ' ' + hour + ':' + minu + ':' + sec + ' ' + week */
+        let week = arrweek[day]
+
         this.time = hour + ':' + minu + ':' + sec + ' ' + week
       },
       setBg() {
@@ -198,12 +235,11 @@
           this.bgSrc = '/mac/img/bg.0e445a5d.jpg'
         }
       }
-    },
-    mounted() {}
+    }
   }
 </script>
 
-<style scoped>
+<style>
   @import url("../assets/css/common.css");
 
   .header {
@@ -250,7 +286,7 @@
     margin-right: 10px;
   }
 
-  .content {
+  .content-hone {
     height: calc(100vh - 30px);
     background: url(../assets/images/bg.jpg) no-repeat no-repeat center;
     background-size: 100% 100%;
@@ -357,5 +393,9 @@
   .weather iframe {
     height: calc(100vh - 30px);
     border: none;
+  }
+
+  .vl-notify-content {
+    height: 100% !important;
   }
 </style>

@@ -1,12 +1,7 @@
 <template>
-  <div class="computer" v-if="computerShow">
-    <div class="header">
-      <span class="narrow" @click="close">一</span>
-      <span class="close" @click="close">X</span>
-    </div>
+  <div class="computer">
     <div class="navigation"><img src="../assets/images/computer.png" alt="">&nbsp;&gt;&nbsp;我的电脑</div>
     <div class="content">
-
       <ul class="left-box">
         <li class="iconfont">&#xe636;&nbsp;&nbsp;主目录</li>
         <li class="iconfont">&#xe600;&nbsp;&nbsp;视频</li>
@@ -42,64 +37,22 @@
 </template>
 
 <script>
-export default {
-  name: 'Computer',
-  props: {
-    computerShow: Boolean
-  },
-  methods: {
-    close () {
-      this.$emit('update:computerShow', false)
+  export default {
+    name: 'Computer',
+    props: {
+
+    },
+    methods: {
+
     }
   }
-}
 </script>
 
 <style scoped>
   .computer {
-    position: fixed;
-    top: 50px;
-    left: calc(50% - 500px);
-    height: 600px;
-    width: 1000px;
-    background: #F9F9FB;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 3px 8px #888888;
-  }
-
-  .header {
-    display: flex;
-    height: 30px;
-    background: url(../assets/images/h-bg.jpg);
-    border: 1px solid #B4B4B4;
-    box-sizing: border-box;
-    padding: 5px 0;
-    box-shadow: 0 1px 8px #888888;
-    justify-content: flex-end;
-  }
-
-  .header span {
-    display: inline-block;
-    height: 18px;
-    width: 18px;
-    line-height: 18px;
-    text-align: center;
-    border-radius: 50%;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 1px 8px #888888;
-    font-size: 12px;
-  }
-
-  .header .narrow {
-    margin-right: 10px;
-    background: #FEBF30;
-  }
-
-  .header .close {
-    margin-right: 20px;
-    background: #FD5858;
+    width: 100%;
+    min-height: 100%;
+    background: #fff;
   }
 
   .navigation {
